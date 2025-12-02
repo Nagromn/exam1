@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const API_BASE_URL = process.env.API_URL;
+const API_BASE_URL = process.env.API_URL; // Ajouter plutot une variable d'env pour ne pas exposer directement la route api ici
 
 const Register = () => {
   const [formData, setFormData] = useState({

@@ -1,7 +1,7 @@
 // src/services/adminApi.js
 import axios from "axios";
 
-const API_BASE_URL = process.env.API_URL;
+const API_BASE_URL = process.env.API_URL; // Ajouter plutot une variable d'env pour ne pas exposer directement la route api ici
 
 export const getOrders = () => {
   try {
