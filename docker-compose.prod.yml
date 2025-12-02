@@ -1,0 +1,52 @@
+version: "3"
+
+services:
+  frontend:
+    build: ./frontend
+    expose:
+      - "80"
+
+  backend:
+    build: ./backend
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/mydatabase
+    expose:
+      - "80"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    volumes:
+      - mongo_data:/data/db
+    expose:
+      - "27017"
+
+  notifications:
+    build: ./microservices/notifications
+    expose:
+      - "80"
+
+  stock-management:
+    build: ./microservices/stock-management
+    expose:
+      - "80"
+
+  auth-gateway:
+    build: ./microservices/auth-gateway
+    expose:
+      - "4001"
+
+  gateway:
+    build: ./gateway
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+      - notifications
+      - stock-management
+      - auth-gateway
+
+volumes:
+  mongo_data:
