@@ -1,6 +1,11 @@
-FROM nginx:alpine
+FROM node:22-alpine
 
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+WORKDIR /app
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+COPY package*.json ./
+RUN npm install --production
+
+COPY . .
+
+EXPOSE 5005
+CMD ["node", "server.js"]
