@@ -11,11 +11,15 @@ services:
       - auth-gateway
       - notifications
       - stock-management
+    networks:
+      - default
 
   frontend:
     build: ./frontend
     expose:
       - "3000"
+    networks:
+      - default
 
   backend:
     build: ./backend
@@ -25,6 +29,8 @@ services:
       - "5000"
     depends_on:
       - mongo
+    networks:
+      - default
 
   mongo:
     image: mongo
@@ -32,16 +38,22 @@ services:
       - mongo_data:/data/db
     expose:
       - "27017"
+    networks:
+      - default
 
   notifications:
     build: ./microservices/notifications
     expose:
       - "3001"
+    networks:
+      - default
 
   stock-management:
     build: ./microservices/stock-management
     expose:
       - "3002"
+    networks:
+      - default
 
   auth-gateway:
     build: ./microservices/auth-gateway
@@ -60,6 +72,8 @@ services:
       - notifications
       - stock-management
       - auth-gateway
+    networks:
+      - default
 
 volumes:
   mongo_data:
