@@ -47,7 +47,8 @@ services:
     build: ./microservices/auth-gateway
     expose:
       - "4001"
-    networks: default
+    networks: 
+      - default
 
   gateway:
     build: ./gateway
