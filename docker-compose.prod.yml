@@ -1,6 +1,10 @@
 services:
   nginx:
     image: nginx:alpine
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./ssl:/etc/ssl/la-doue:ro
     ports:
       - "80:80"
       - "443:443"
