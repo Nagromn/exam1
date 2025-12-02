@@ -1,26 +1,12 @@
-# --- BUILD STAGE ---
-FROM node:22-alpine AS builder
+FROM node:22-alpine
+
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install
+RUN npm install --production
+
 COPY . .
-RUN npm run build
 
-# --- PRODUCTION STAGE ---
-FROM nginx:alpine
+EXPOSE 10000
 
-# Remove default config
-RUN rm /etc/nginx/conf.d/default.conf
-
-# Copy your Nginx config
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
-
-# Copy React build
-COPY --from=builder /app/build /usr/share/nginx/html
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
-
-
+CMD ["node", "server.js"]

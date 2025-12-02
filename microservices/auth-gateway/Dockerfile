@@ -1,4 +1,3 @@
-# Base image
 FROM node:22-alpine
 
 WORKDIR /app
@@ -9,6 +8,6 @@ RUN npm install --production
 
 COPY . .
 
-EXPOSE 4001
+EXPOSE 10000
 
 CMD ["node", "index.js"]
