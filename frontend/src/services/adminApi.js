@@ -1,7 +1,7 @@
 // src/services/adminApi.js
 import axios from "axios";
 
-const API_BASE_URL = "https://backend-s5xc.onrender.com/api";
+const API_BASE_URL = process.env.API_URL;
 
 export const getOrders = () => {
   try {

@@ -2,6 +2,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const API_BASE_URL = process.env.API_URL;
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +27,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/auth/register', formData);
+      await axios.post(`${API_BASE_URL}/auth/register`, formData);
       alert('Inscription réussie ! Vous pouvez maintenant vous connecter.');
       navigate('/login');
     } catch (err) {
